@@ -16,6 +16,8 @@ public class Bootstrap {
         WaterBills waterBills = new DefaultWaterBills();
         Tariffs tariff = new DefaultTariffs();
 
+        tariff.load();
+
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             long bill = Long.parseLong(reader.readLine());
             System.out.println(bill);
