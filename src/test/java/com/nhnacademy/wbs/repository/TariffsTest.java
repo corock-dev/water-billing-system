@@ -9,14 +9,12 @@ class TariffsTest {
 
     @BeforeEach
     void setUp() {
-        tariffs = new DefaultTariffs(new CsvDataParser());
+        // tariffs = new DefaultTariffs(new CsvDataParser());
     }
 
     @Test
-    void load() {
-        tariffs.load();
-
-
+    void load(String ext) {
+        tariffs.load(ext);
     }
 
     @Test

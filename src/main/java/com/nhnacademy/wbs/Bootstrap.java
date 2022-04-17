@@ -26,10 +26,13 @@ public class Bootstrap {
                 context.getBean("csvDataParser", DataParser.class);
                 context.getBean("jsonDataParser", DataParser.class);
 
-                context.getBean("defaultTariffs", Tariffs.class).load();
+                writer.write("불러올 파일 확장자를 선택하세요(1. csv / 2 json)"
+                    + System.lineSeparator() + "> ");
+                writer.flush();
+                context.getBean("defaultTariffs", Tariffs.class).load(reader.readLine());
 
                 while (true) {
-                    writer.write("> ");
+                    writer.write("사용량을 입력하세요." + System.lineSeparator() + "> ");
                     writer.flush();
                     Stream<WaterBill> data =
                         context.getBean("defaultWaterBills", WaterBills.class)

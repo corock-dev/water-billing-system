@@ -73,4 +73,18 @@ public class Tariff {
     public String getUnitPrice() {
         return unitPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Tariff{" +
+            "no=" + no +
+            ", city='" + city + '\'' +
+            ", sector='" + sector + '\'' +
+            ", stage=" + stage +
+            ", intervalFrom=" + intervalFrom +
+            ", intervalTo=" + intervalTo +
+            ", intervalAmount=" + intervalAmount +
+            ", unitPrice='" + unitPrice + '\'' +
+            '}';
+    }
 }

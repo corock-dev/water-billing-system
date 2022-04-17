@@ -2,9 +2,9 @@ package com.nhnacademy.wbs.repository;
 
 import com.nhnacademy.wbs.service.DataParser;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,17 +14,22 @@ import org.springframework.stereotype.Repository;
 public class DefaultTariffs implements Tariffs {
     private Collection<Tariff> tariffs;
 
-    private final DataParser dataParser;
+    private final DataParser jsonDataParser;
+    private final DataParser csvDataParser;
 
     @Autowired
-    public DefaultTariffs(@Qualifier(value = "jsonDataParser") DataParser dataParser) {
-        this.dataParser = dataParser;
+    public DefaultTariffs(DataParser jsonDataParser, DataParser csvDataParser) {
+        this.jsonDataParser = jsonDataParser;
+        this.csvDataParser = csvDataParser;
     }
 
     @Override
-    public void load() {
-        // tariffs = dataParser.parse("data/Tariff_20220331.csv");
-        tariffs = dataParser.parse("data/Tariff_20220331.json");
+    public void load(String ext) {
+        if (Objects.equals("csv", ext)) {
+            tariffs = csvDataParser.parse("data/Tariff_20220331.csv");
+            return;
+        }
+        tariffs = jsonDataParser.parse("data/Tariff_20220331.json");
     }
 
     @Override
