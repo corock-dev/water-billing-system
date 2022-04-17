@@ -25,12 +25,12 @@ public class Tariff {
     /**
      * 구간시작(세제곱미터)
      */
-    private final int startInterval;
+    private final int intervalFrom;
 
     /**
      * 구간끝(세제곱미터)
      */
-    private final int endInterval;
+    private final int intervalTo;
 
     /**
      * 구간금액(원)
@@ -40,17 +40,25 @@ public class Tariff {
     /**
      * 단계별 기본요금(원)
      */
-    private final Money basicCharge;
+    private final String unitPrice;
 
     public Tariff(int no, String city, String sector, int stage,
-                  int startInterval, int endInterval, Money intervalAmount, Money basicCharge) {
+                  int intervalFrom, int intervalTo, Money intervalAmount, String unitPrice) {
         this.no = no;
         this.city = city;
         this.sector = sector;
         this.stage = stage;
-        this.startInterval = startInterval;
-        this.endInterval = endInterval;
+        this.intervalFrom = intervalFrom;
+        this.intervalTo = intervalTo;
         this.intervalAmount = intervalAmount;
-        this.basicCharge = basicCharge;
+        this.unitPrice = unitPrice;
+    }
+
+    public int getIntervalFrom() {
+        return intervalFrom;
+    }
+
+    public int getIntervalTo() {
+        return intervalTo;
     }
 }

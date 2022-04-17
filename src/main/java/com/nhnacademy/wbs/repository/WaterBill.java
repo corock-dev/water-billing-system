@@ -1,5 +1,7 @@
 package com.nhnacademy.wbs.repository;
 
+import org.springframework.stereotype.Repository;
+
 public class WaterBill {
     private final String city;
     private final String sector;
