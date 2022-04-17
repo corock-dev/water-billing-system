@@ -23,10 +23,10 @@ public class Bootstrap {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                  BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out))) {
 
-                context.getBean("csvDataParser", DataParser.class);
+                // context.getBean("csvDataParser", DataParser.class);
+                context.getBean("jsonDataParser", DataParser.class);
 
-                Tariffs tariffs = context.getBean("defaultTariffs", Tariffs.class);
-                tariffs.load();
+                context.getBean("defaultTariffs", Tariffs.class).load();
 
                 writer.write("> ");
                 writer.flush();
@@ -36,12 +36,10 @@ public class Bootstrap {
 
                 context.getBean("defaultResultReport", ResultReport.class).report(data);
 
-
             } catch (IOException e) {
                 // FIXME
                 // e.printStackTrace();
             }
         }
-
     }
 }

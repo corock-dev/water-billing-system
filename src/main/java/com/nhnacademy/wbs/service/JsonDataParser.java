@@ -3,6 +3,7 @@ package com.nhnacademy.wbs.service;
 import static com.nhnacademy.wbs.repository.Money.Currency.WON;
 import static java.lang.Integer.parseInt;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.nhnacademy.wbs.repository.Money;
 import com.nhnacademy.wbs.repository.Tariff;
 import java.io.BufferedReader;
@@ -13,11 +14,13 @@ import java.util.Collection;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-// @Service
-public class CsvDataParser implements DataParser {
+@Service
+public class JsonDataParser implements DataParser {
     @Override
     public Collection<Tariff> parse(String path) {
         Collection<Tariff> results = new ArrayList<>();
+
+        Object
 
         try (BufferedReader reader = new BufferedReader(
             new InputStreamReader(new ClassPathResource(path).getInputStream()))) {

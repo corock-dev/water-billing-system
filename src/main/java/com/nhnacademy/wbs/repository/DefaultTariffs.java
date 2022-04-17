@@ -22,7 +22,8 @@ public class DefaultTariffs implements Tariffs {
 
     @Override
     public void load() {
-        tariffs = dataParser.parse("data/Tariff_20220331.csv");
+        // tariffs = dataParser.parse("data/Tariff_20220331.csv");
+        tariffs = dataParser.parse("data/Tariff_20220331.json");
     }
 
     @Override
