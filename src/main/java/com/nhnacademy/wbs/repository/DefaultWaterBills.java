@@ -28,7 +28,7 @@ public class DefaultWaterBills implements WaterBills {
     }
 
     private WaterBill instantiateWaterBills(Tariff tariff, int usage) {
-        int amount = tariff.getIntervalAmount().getAmount();
+        int amount = tariff.getIntervalAmount();
         return new WaterBill(tariff.getCity(), tariff.getSector(), amount, amount * usage);
     }
 }

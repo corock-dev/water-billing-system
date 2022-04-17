@@ -23,22 +23,23 @@ public class Bootstrap {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                  BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out))) {
 
-                // context.getBean("csvDataParser", DataParser.class);
+                context.getBean("csvDataParser", DataParser.class);
                 context.getBean("jsonDataParser", DataParser.class);
 
                 context.getBean("defaultTariffs", Tariffs.class).load();
 
-                writer.write("> ");
-                writer.flush();
-                Stream<WaterBill> data =
-                    context.getBean("defaultWaterBills", WaterBills.class)
-                           .calculateWaterBills(parseInt(reader.readLine()));
+                while (true) {
+                    writer.write("> ");
+                    writer.flush();
+                    Stream<WaterBill> data =
+                        context.getBean("defaultWaterBills", WaterBills.class)
+                               .calculateWaterBills(parseInt(reader.readLine()));
 
-                context.getBean("defaultResultReport", ResultReport.class).report(data);
+                    context.getBean("defaultResultReport", ResultReport.class).report(data);
+                }
 
             } catch (IOException e) {
-                // FIXME
-                // e.printStackTrace();
+                throw new IllegalStateException("데이터 로드가 정상적으로 완료되지 않았습니다. " + e.getMessage());
             }
         }
     }

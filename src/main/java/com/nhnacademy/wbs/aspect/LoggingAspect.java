@@ -11,8 +11,6 @@ import org.springframework.util.StopWatch;
 @Aspect
 @Component
 public class LoggingAspect {
-    // TODO: 실행하는 스프링 빈의 모든 메소드의 실행시간을 elapse.log 파일에 저장하세요. (AOP 를 이용해야 합니다.)
-
     private static final Log log = LogFactory.getLog(LoggingAspect.class);
 
     @Around("execution(* com.nhnacademy.wbs..*.*(..))")

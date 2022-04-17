@@ -1,48 +1,37 @@
 package com.nhnacademy.wbs.repository;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Tariff {
-    /**
-     * 순번
-     */
-    private final int no;
+    @JsonProperty(value = "순번")
+    private int no;
 
-    /**
-     * 지자체명
-     */
-    private final String city;
+    @JsonProperty(value = "지자체명")
+    private String city;
 
-    /**
-     * 업종
-     */
-    private final String sector;
+    @JsonProperty(value = "업종")
+    private String sector;
 
-    /**
-     * 단계
-     */
-    private final int stage;
+    @JsonProperty(value = "단계")
+    private int stage;
 
-    /**
-     * 구간시작(세제곱미터)
-     */
-    private final int intervalFrom;
+    @JsonProperty(value = "구간시작(세제곱미터)")
+    private int intervalFrom;
 
-    /**
-     * 구간끝(세제곱미터)
-     */
-    private final int intervalTo;
+    @JsonProperty(value = "구간끝(세제곱미터)")
+    private int intervalTo;
 
-    /**
-     * 구간금액(원)
-     */
-    private final Money intervalAmount;
+    @JsonProperty(value = "구간금액(원)")
+    private int intervalAmount;
 
-    /**
-     * 단계별 기본요금(원)
-     */
-    private final String unitPrice;
+    @JsonProperty(value = "단계별 기본요금(원)")
+    private String unitPrice;
+
+    public Tariff() {
+    }
 
     public Tariff(int no, String city, String sector, int stage,
-                  int intervalFrom, int intervalTo, Money intervalAmount, String unitPrice) {
+                  int intervalFrom, int intervalTo, int intervalAmount, String unitPrice) {
         this.no = no;
         this.city = city;
         this.sector = sector;
@@ -69,7 +58,19 @@ public class Tariff {
         return intervalTo;
     }
 
-    public Money getIntervalAmount() {
+    public int getIntervalAmount() {
         return intervalAmount;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public int getStage() {
+        return stage;
+    }
+
+    public String getUnitPrice() {
+        return unitPrice;
     }
 }

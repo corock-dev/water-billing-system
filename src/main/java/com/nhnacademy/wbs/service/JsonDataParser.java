@@ -1,46 +1,33 @@
 package com.nhnacademy.wbs.service;
 
-import static com.nhnacademy.wbs.repository.Money.Currency.WON;
-import static java.lang.Integer.parseInt;
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.nhnacademy.wbs.repository.Money;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.wbs.repository.Tariff;
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.Collection;
-import org.springframework.core.io.ClassPathResource;
+import java.util.List;
+import java.util.Objects;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service(value = "jsonDataParser")
 public class JsonDataParser implements DataParser {
     @Override
     public Collection<Tariff> parse(String path) {
-        Collection<Tariff> results = new ArrayList<>();
+        URL resource = this.getClass().getClassLoader().getResource(path);
+        File jsonFile = new File(Objects.requireNonNull(resource).getFile());
 
-        Object
+        ObjectMapper mapper = new ObjectMapper();
+        List<Tariff> tariffs;
 
-        try (BufferedReader reader = new BufferedReader(
-            new InputStreamReader(new ClassPathResource(path).getInputStream()))) {
-
-            reader.lines()
-                  .skip(1)
-                  .map(line -> line.replaceAll(" ", ""))
-                  .map(line -> line.split(","))
-                  .forEach(line -> results.add(this.instantiateTariff(line)));
-
+        try {
+            tariffs = mapper.readValue(jsonFile, new TypeReference<>() {
+            });
         } catch (IOException e) {
-            //FIXME
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
-        return results;
-    }
-
-    private Tariff instantiateTariff(String[] tariff) {
-        return new Tariff(parseInt(tariff[0]), tariff[1], tariff[2], parseInt(tariff[3]),
-            parseInt(tariff[4]), parseInt(tariff[5]), new Money(parseInt(tariff[6]), WON), "");
+        return tariffs;
     }
 }

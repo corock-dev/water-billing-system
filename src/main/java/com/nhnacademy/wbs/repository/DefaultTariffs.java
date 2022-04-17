@@ -4,6 +4,7 @@ import com.nhnacademy.wbs.service.DataParser;
 import java.util.Collection;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,7 +17,7 @@ public class DefaultTariffs implements Tariffs {
     private final DataParser dataParser;
 
     @Autowired
-    public DefaultTariffs(DataParser dataParser) {
+    public DefaultTariffs(@Qualifier(value = "jsonDataParser") DataParser dataParser) {
         this.dataParser = dataParser;
     }
 
