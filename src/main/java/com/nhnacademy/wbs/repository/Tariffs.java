@@ -1,6 +1,7 @@
 package com.nhnacademy.wbs.repository;
 
 import java.util.Collection;
+import java.util.stream.Stream;
 
 /**
  * 요금표 저장소
@@ -8,7 +9,7 @@ import java.util.Collection;
 public interface Tariffs {
     void load();
 
-    void findTariffsByUsage(int usage);
+    Stream<Tariff> findTariffsByUsage(int usage);
 
     Collection<Tariff> findAll();
 }

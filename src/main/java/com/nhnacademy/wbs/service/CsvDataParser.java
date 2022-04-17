@@ -24,12 +24,13 @@ public class CsvDataParser implements DataParser {
             new InputStreamReader(new ClassPathResource(path).getInputStream()))) {
 
             reader.lines()
-                .skip(1)
-                .map(line -> line.replaceAll(" ", ""))
-                .map(line -> line.split(","))
-                .forEach(line -> results.add(this.instantiateTariff(line)));
+                  .skip(1)
+                  .map(line -> line.replaceAll(" ", ""))
+                  .map(line -> line.split(","))
+                  .forEach(line -> results.add(this.instantiateTariff(line)));
 
         } catch (IOException e) {
+            //FIXME
             e.printStackTrace();
         }
 
@@ -38,6 +39,6 @@ public class CsvDataParser implements DataParser {
 
     private Tariff instantiateTariff(String[] tariff) {
         return new Tariff(parseInt(tariff[0]), tariff[1], tariff[2], parseInt(tariff[3]),
-            parseInt(tariff[4]), parseInt(tariff[5]), new Money(parseLong(tariff[6]), WON), "");
+            parseInt(tariff[4]), parseInt(tariff[5]), new Money(parseInt(tariff[6]), WON), "");
     }
 }

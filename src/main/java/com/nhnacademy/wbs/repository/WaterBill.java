@@ -1,18 +1,20 @@
 package com.nhnacademy.wbs.repository;
 
-import org.springframework.stereotype.Repository;
-
 public class WaterBill {
     private final String city;
     private final String sector;
-    private final long unitPrice;
-    private final long billTotal;
+    private final int unitPrice;
+    private final int billTotal;
 
-    public WaterBill(String city, String sector, long unitPrice, long billTotal) {
+    public WaterBill(String city, String sector, int unitPrice, int billTotal) {
         this.city = city;
         this.sector = sector;
         this.unitPrice = unitPrice;
         this.billTotal = billTotal;
+    }
+
+    public int getBillTotal() {
+        return billTotal;
     }
 
     @Override

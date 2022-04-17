@@ -1,6 +1,5 @@
 package com.nhnacademy.wbs.repository;
 
-
 public class Tariff {
     /**
      * 순번
@@ -54,11 +53,23 @@ public class Tariff {
         this.unitPrice = unitPrice;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
     public int getIntervalFrom() {
         return intervalFrom;
     }
 
     public int getIntervalTo() {
         return intervalTo;
+    }
+
+    public Money getIntervalAmount() {
+        return intervalAmount;
     }
 }

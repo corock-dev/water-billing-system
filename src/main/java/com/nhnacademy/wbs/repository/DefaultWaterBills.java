@@ -1,5 +1,10 @@
 package com.nhnacademy.wbs.repository;
 
+import static java.util.Comparator.comparing;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.stream.Stream;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -11,10 +16,19 @@ public class DefaultWaterBills implements WaterBills {
     }
 
     @Override
-    public void calculateWaterBills(int usage) {
-        // 요금을 계산한다
+    public Stream<WaterBill> calculateWaterBills(int usage) {
+        Collection<WaterBill> waterBills = new ArrayList<>();
 
-        tariffs.load();
-        tariffs.findTariffsByUsage(usage);
+        Stream<Tariff> targetTariffs = tariffs.findTariffsByUsage(usage);
+        targetTariffs.forEach(tariff -> waterBills.add(instantiateWaterBills(tariff, usage)));
+
+        return waterBills.stream()
+                         .sorted(comparing(WaterBill::getBillTotal))
+                         .limit(5);
+    }
+
+    private WaterBill instantiateWaterBills(Tariff tariff, int usage) {
+        int amount = tariff.getIntervalAmount().getAmount();
+        return new WaterBill(tariff.getCity(), tariff.getSector(), amount, amount * usage);
     }
 }

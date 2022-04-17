@@ -15,7 +15,7 @@ public class LoggingAspect {
 
     private static final Log log = LogFactory.getLog(LoggingAspect.class);
 
-    @Around("execution(public * com.nhnacademy.wbs..*.*(..))")
+    @Around("execution(* com.nhnacademy.wbs..*.*(..))")
     public Object profile(ProceedingJoinPoint pjp) throws Throwable {
         StopWatch stopWatch = new StopWatch(pjp.getSignature().getName());
         stopWatch.start(pjp.getSignature().getName());
